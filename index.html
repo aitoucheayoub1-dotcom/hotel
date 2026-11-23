@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hôtel — Accueil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="logo">Hôtel Horizon</a>
+      <nav class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="#chambres">Chambres</a>
+        <a href="#services">Services</a>
+        <a href="#reservation" class="btn-nav">Réserver</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-content">
+      <h1>Confort et élégance au cœur de la ville</h1>
+      <p>Réservez votre séjour facilement et profitez d'un service attentif toute l'année.</p>
+      <a href="#chambres" class="btn-primary">Découvrir les chambres</a>
+    </div>
+  </section>
+
+  <main class="container">
+    <section id="chambres" class="section">
+      <h2>Nos chambres</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Chambre Standard</h3>
+          <p>Idéale pour un séjour confortable en solo ou en duo avec Wi-Fi et climatisation.</p>
+          <span class="price">85 € / nuit</span>
+        </article>
+        <article class="card">
+          <h3>Chambre Supérieure</h3>
+          <p>Espace lumineux avec coin salon, vue agréable et petit-déjeuner inclus.</p>
+          <span class="price">120 € / nuit</span>
+        </article>
+        <article class="card">
+          <h3>Suite Familiale</h3>
+          <p>Deux espaces séparés pensés pour les familles recherchant calme et praticité.</p>
+          <span class="price">175 € / nuit</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <h2>Services inclus</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Réception 24h/24</h3>
+          <p>Accueil disponible à toute heure pour vos arrivées et départs.</p>
+        </div>
+        <div class="card">
+          <h3>Wi-Fi Haut Débit</h3>
+          <p>Connexion stable et gratuite dans toutes les chambres et espaces communs.</p>
+        </div>
+        <div class="card">
+          <h3>Petit-Déjeuner</h3>
+          <p>Options variées préparées chaque matin pour bien démarrer la journée.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="reservation" class="section reservation-box">
+      <h2>Demande de réservation</h2>
+      <form class="form-grid">
+        <label>
+          Nom complet
+          <input type="text" placeholder="Votre nom" required />
+        </label>
+        <label>
+          Type de chambre
+          <select>
+            <option>Chambre Standard</option>
+            <option>Chambre Supérieure</option>
+            <option>Suite Familiale</option>
+          </select>
+        </label>
+        <label>
+          Arrivée
+          <input type="date" required />
+        </label>
+        <label>
+          Départ
+          <input type="date" required />
+        </label>
+        <button type="submit" class="btn-primary full-width">Envoyer la demande</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>© 2026 Hôtel Horizon — Tous droits réservés.</p>
+      <p>Contact : contact@hotel-horizon.local</p>
+    </div>
+  </footer>
+</body>
+</html>
