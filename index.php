@@ -1,16 +1,12 @@
 <?php
+require_once __DIR__ . '/includes/fonctions.php';
+
 $pageTitle = "Hôtel - Accueil";
+$chambres = obtenirChambres();
+$services = obtenirServices();
+
 require_once __DIR__ . '/includes/header.php';
-?>
-
-<main class="container">
-    <section class="hero">
-        <h1>Bienvenue à notre Hôtel</h1>
-        <p>Réservez votre séjour en toute simplicité et profitez de nos services.</p>
-        <a href="reservation.php" class="btn">Réserver maintenant</a>
-    </section>
-</main>
-
-<?php
+require_once __DIR__ . '/vues/accueil.php';
 require_once __DIR__ . '/includes/footer.php';
-?>
+
+
