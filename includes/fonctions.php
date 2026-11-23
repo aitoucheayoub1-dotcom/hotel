@@ -93,3 +93,62 @@ function validerReservation(array $donnees): array
 
     return $erreurs;
 }
+function rechercherTypesChambres(
+    PDO $pdo,
+    string $q = '',
+    int $capaciteMin = 0,
+    string $tri = 'id_asc',
+    int $page = 1,
+    int $parPage = 6
+): array {
+    $page = max(1, $page);
+    $offset = ($page - 1) * $parPage;
+    $where = [];
+    $params = [];
+
+    if ($q !== '') {
+        $where[] = "nom LIKE :q";
+        $params[':q'] = '%' . $q . '%';
+    }
+
+    if ($capaciteMin > 0) {
+        $where[] = "capacite >= :capacite";
+        $params[':capacite'] = $capaciteMin;
+    }
+
+    $sqlWhere = $where ? 'WHERE ' . implode(' AND ', $where) : '';
+
+    $trisAutorises = [
+        'id_asc'     => 'id ASC',
+        'prix_asc'   => 'prix_nuit ASC',
+        'prix_desc'  => 'prix_nuit DESC',
+        'nom_asc'    => 'nom ASC',
+        'capacite_desc' => 'capacite DESC',
+    ];
+    $orderBy = $trisAutorises[$tri] ?? 'id ASC';
+
+    $stmtCount = $pdo->prepare("SELECT COUNT(*) FROM types_chambres $sqlWhere");
+    $stmtCount->execute($params);
+    $total = (int) $stmtCount->fetchColumn();
+
+    $sql = "SELECT id, nom, prix_nuit, capacite FROM types_chambres $sqlWhere ORDER BY $orderBy LIMIT :limit OFFSET :offset";
+    $stmt = $pdo->prepare($sql);
+
+    foreach ($params as $key => $val) {
+        if ($key === ':capacite') {
+            $stmt->bindValue($key, (int) $val, PDO::PARAM_INT);
+        } else {
+            $stmt->bindValue($key, $val, PDO::PARAM_STR);
+        }
+    }
+    $stmt->bindValue(':limit', $parPage, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return [
+        'items' => $stmt->fetchAll(),
+        'total' => $total,
+        'pages' => max(1, (int) ceil($total / $parPage)),
+        'page'  => $page,
+    ];
+}
